@@ -72,7 +72,7 @@ export default function Homepage() {
 function FeaturedCollection({collection}) {
   if (!collection) return null;
   const image = collection?.image;
-  
+
   return (
     <Link
       className="featured-collection"
@@ -139,7 +139,7 @@ function RecommendedProducts({products}) {
                     <div className="product-card">
                       {/* Sale badge indicator */}
                       {isOnSale && <span className="sale-badge">On Sale!</span>}
-                      
+
                       {/* Product image */}
                       <div className="image-container">
                         <Image
@@ -149,7 +149,9 @@ function RecommendedProducts({products}) {
                           sizes="(min-width: 45em) 20vw, 50vw"
                         />
                       </div>
-
+                    </div>
+                    {/* Product details and pricing */}
+                    <div className="product-info">
                       {/* Color variant selector dots */}
                       <div className="color-options">
                         {colorVariants.map(({color}, index) => (
@@ -165,25 +167,25 @@ function RecommendedProducts({products}) {
                           />
                         ))}
                       </div>
-
-                      {/* Product details and pricing */}
-                      <div className="product-info">
-                        <p className="vendor">{product.vendor}</p>
-                        <h4>{product.title}</h4>
-                        <div className="pricing">
-                          {isOnSale && (
-                            <span className="compare-at">
-                              <Money
-                                data={
-                                  product.compareAtPriceRange.minVariantPrice
-                                }
-                              />
-                            </span>
-                          )}
-                          <span className="price">
-                            <Money data={product.priceRange.minVariantPrice} />
+                      <p className="vendor">{product.vendor}</p>
+                      <h4>{product.title}</h4>
+                      <div className="pricing">
+                        {isOnSale && (
+                          <span className="compare-at">
+                            ${product.compareAtPriceRange.minVariantPrice.amount}0
+                            {/* <Money
+                              data={product.compareAtPriceRange.minVariantPrice}
+                              withoutCurrency
+                            /> */}
                           </span>
-                        </div>
+                        )}
+                        <span className="price">
+                          ${product.priceRange.minVariantPrice.amount}0
+                          {/* <Money
+                            data={product.priceRange.minVariantPrice}
+                            withoutCurrency
+                          /> */}
+                        </span>
                       </div>
                     </div>
                   </Link>
